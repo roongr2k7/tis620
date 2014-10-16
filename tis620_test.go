@@ -8,7 +8,8 @@ import (
 func TestConvert(t *testing.T) {
 	expectUTF8 := []byte("hello สวัสดี")
 	b := []byte{0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x20, 0xca, 0xc7, 0xd1, 0xca, 0xb4, 0xd5}
-	actual := Convert(b)
+	tis620buf := NewTIS620(b)
+	actual := tis620buf.UTF8()
 	if !reflect.DeepEqual(expectUTF8, actual) {
 		t.Errorf("expect %v but %v", expectUTF8, actual)
 		t.Errorf("expect %q but %q", expectUTF8, actual)
