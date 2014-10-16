@@ -15,3 +15,25 @@ func TestConvert(t *testing.T) {
 		t.Errorf("expect %q but %q", expectUTF8, actual)
 	}
 }
+
+func TestIsTIS620(t *testing.T) {
+	dt := []DataTableStringBool{
+		DataTableStringBool{input: "TIS-620", expected: true},
+		DataTableStringBool{input: "tis-620", expected: true},
+		DataTableStringBool{input: "tis620", expected: false},
+		DataTableStringBool{input: "utf-8", expected: false},
+		DataTableStringBool{input: "", expected: false},
+	}
+
+	for _, test := range dt {
+		actual := IsTIS620(test.input)
+		if test.expected != actual {
+			t.Errorf("expect %v but %v", test.expected, actual)
+		}
+	}
+}
+
+type DataTableStringBool struct {
+	input    string
+	expected bool
+}

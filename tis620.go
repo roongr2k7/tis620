@@ -1,5 +1,7 @@
 package tis620
 
+import "strings"
+
 type TIS620 struct {
 	buf []byte
 }
@@ -19,4 +21,8 @@ func (t *TIS620) UTF8() []byte {
 		}
 	}
 	return ret
+}
+
+func IsTIS620(charset string) bool {
+	return strings.ToLower(charset) == "tis-620"
 }
